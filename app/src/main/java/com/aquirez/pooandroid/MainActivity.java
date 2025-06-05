@@ -1,9 +1,10 @@
 package com.aquirez.pooandroid;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-
+import pessoas.pessoa;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -11,6 +12,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+
+    pessoa pessoa = new pessoa();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void salvar(View view) {
+        TextView nomeL = findViewById(R.id.nome);
+        TextView sobrenomeL = findViewById(R.id.sobrenome);
+        TextView cursoL = findViewById(R.id.curso);
+        TextView telefoneL = findViewById(R.id.telefone);
+        nomeL.setText("");
+        sobrenomeL.setText("");
+        cursoL.setText("");
+        telefoneL.setText("");
+    }
 
+    public void finalizar() {
+
+        finish();
     }
 }
 

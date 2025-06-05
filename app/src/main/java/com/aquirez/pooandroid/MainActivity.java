@@ -1,7 +1,10 @@
 package com.aquirez.pooandroid;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import util.salvar;
 import android.view.View;
 import android.widget.TextView;
 import pessoas.pessoa;
@@ -13,8 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    pessoa pessoa = new pessoa();
-
+    pessoa Pessoa = new pessoa(String.valueOf(findViewById(R.id.nome)), String.valueOf(findViewById(R.id.sobrenome)),
+            String.valueOf(findViewById(R.id.curso)), String.valueOf(findViewById(R.id.telefone)));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,26 +31,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     public void limpar(View view) {
         TextView nomeL = findViewById(R.id.nome);
-        TextView sobrenomeL = findViewById(R.id.sobrenome);
-        TextView cursoL = findViewById(R.id.curso);
-        TextView telefoneL = findViewById(R.id.telefone);
         nomeL.setText("");
+        TextView sobrenomeL = findViewById(R.id.sobrenome);
         sobrenomeL.setText("");
+        TextView cursoL = findViewById(R.id.curso);
         cursoL.setText("");
+        TextView telefoneL = findViewById(R.id.telefone);
         telefoneL.setText("");
     }
 
-    public void salvar(View view) {
-        TextView nomeL = findViewById(R.id.nome);
-        TextView sobrenomeL = findViewById(R.id.sobrenome);
-        TextView cursoL = findViewById(R.id.curso);
-        TextView telefoneL = findViewById(R.id.telefone);
-        nomeL.setText("");
-        sobrenomeL.setText("");
-        cursoL.setText("");
-        telefoneL.setText("");
+    public void btn_salvar(View nome, View sobrenome, View curso, View telefone) {
+        salvar.Salvar(this, String.valueOf(nome), String.valueOf(sobrenome), String.valueOf(curso), String.valueOf(telefone));
+
     }
 
     public void finalizar() {

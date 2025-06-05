@@ -7,6 +7,14 @@ public class pessoa {
     private String curso;
     private String telefone;
 
+
+    public pessoa(String nome, String sobrenome, String curso, String telefone) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.curso = curso;
+        this.telefone = telefone;
+    }
+
     public String getNome() {
         return nome;
     }

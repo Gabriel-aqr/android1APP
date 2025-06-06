@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     TextView cursoL = findViewById(R.id.curso);
     TextView telefoneL = findViewById(R.id.telefone);
 
+    pessoa pessoa = new pessoa(nomeL, sobrenomeL, cursoL, telefoneL);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     public void limpar(View view) {
         TextView nomeL = findViewById(R.id.nome);
         TextView sobrenomeL = findViewById(R.id.sobrenome);
@@ -45,16 +47,16 @@ public class MainActivity extends AppCompatActivity {
         telefoneL.setText("");
     }
 
-
-    public void botao_salvar(View view, Context context, View nome, View sobrenome, View curso, View telefone) {
-            Button button = (Button) view;
-        salvar.Salvar(context.getApplicationContext(), String.valueOf(nome), String.valueOf(sobrenome), String.valueOf(curso), String.valueOf(telefone));
+    public void btn_salvar(View view, TextView nome, TextView sobrenome, TextView curso, TextView telefone) {
+        salvar.Salvar(getApplicationContext(), String.valueOf(nome), String.valueOf(sobrenome), String.valueOf(curso), String.valueOf(telefone));
 
     }
 
     public void finalizar() {
 
-        finish();
+
     }
 }
+
+
 

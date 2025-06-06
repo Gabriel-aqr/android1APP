@@ -12,6 +12,7 @@ public class salvar {
         editor.putString("sobrenome", sobrenome);
         editor.putString("curso", curso);
         editor.putString("telefone", telefone);
+
         editor.apply();
     }
 }

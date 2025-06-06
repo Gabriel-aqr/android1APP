@@ -1,49 +1,51 @@
 package pessoas;
 
+import android.widget.TextView;
+
 public class pessoa {
 
-    private String nome;
-    private String sobrenome;
-    private String curso;
-    private String telefone;
+    private TextView nome;
+    private TextView sobrenome;
+    private TextView curso;
+    private TextView telefone;
 
 
-    public pessoa(String nome, String sobrenome, String curso, String telefone) {
+    public pessoa(TextView nome, TextView sobrenome, TextView curso, TextView telefone) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.curso = curso;
         this.telefone = telefone;
     }
 
-    public String getNome() {
+    public TextView getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(TextView nome) {
         this.nome = nome;
     }
 
-    public String getSobrenome() {
+    public TextView getSobrenome() {
         return sobrenome;
     }
 
-    public void setSobrenome(String sobrenome) {
+    public void setSobrenome(TextView sobrenome) {
         this.sobrenome = sobrenome;
     }
 
-    public String getCurso() {
+    public TextView getCurso() {
         return curso;
     }
 
-    public void setCurso(String curso) {
+    public void setCurso(TextView curso) {
         this.curso = curso;
     }
 
-    public String getTelefone() {
+    public TextView getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(TextView telefone) {
         this.telefone = telefone;
     }
 

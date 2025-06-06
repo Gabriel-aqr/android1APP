@@ -3,8 +3,6 @@ package util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.aquirez.pooandroid.MainActivity;
-
 public class salvar {
 
     public static void Salvar(Context context, String nome, String sobrenome, String curso, String telefone) {

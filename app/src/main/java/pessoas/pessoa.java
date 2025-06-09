@@ -10,20 +10,6 @@ public class pessoa {
         this.telefone = telefone;
     }
 
-    public String toFormatString() {
-        return nome + ";" + sobrenome + ";" + curso + ";" + telefone;
-    }
-
-    public static pessoa fromFormatString(String str) {
-        String[] dados = str.split(";");
-        if (dados.length == 4) {
-            return new pessoa(dados[0], dados[1], dados[2], dados[3]);
-        } else {
-            return null;
-        }
-    }
-
-
     public String getNome() {
         return nome;
     }

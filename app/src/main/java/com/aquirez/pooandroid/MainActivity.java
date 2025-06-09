@@ -5,19 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import util.salvar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 
 import pessoas.pessoa;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText nomeL, sobrenomeL, cursoL, telefoneL;
-    ArrayList<String> listaVIP;
     SharedPreferences prefs;
+    String nomeS, sobrenomeS, cursoS, telefoneS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +28,20 @@ public class MainActivity extends AppCompatActivity {
         cursoL = findViewById(R.id.curso);
         telefoneL = findViewById(R.id.telefone);
 
-        prefs = getSharedPreferences("vipLista", MODE_PRIVATE);
-        listaVIP = carregarLista();
+        prefs = getSharedPreferences("Lista_Curso", MODE_PRIVATE);
+        String nomeS = prefs.getString("nome", "Nome ");
+        String sobrenomeS = prefs.getString("sobrenome", "Sobrenome ");
+        String cursoS = prefs.getString("CursoS", "Curso ");
+        String telefoneS = prefs.getString("TelefoneS", "Telefone ");
+        nomeL.setText(nomeS);
+        sobrenomeL.setText(sobrenomeS);
+        cursoL.setText(cursoS);
+        telefoneL.setText(telefoneS);
 
-        preencherUltimaPessoa();
     }
 
     public void btn_salvar(View view) {
+        salvar.Salvar(this,nomeL.getText().toString(),sobrenomeL.getText().toString(),cursoL.getText().toString(),telefoneL.getText().toString());
         pessoa p = new pessoa(
                 nomeL.getText().toString(),
                 sobrenomeL.getText().toString(),
@@ -44,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
 
-        Toast.makeText(this, "Adicionado à Lista VIP!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Salvo", Toast.LENGTH_SHORT).show();
     }
 
     public void limpar(View view) {
@@ -58,30 +64,4 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    private void salvarLista() {
-        String listaComoTexto = String.join("#", listaVIP);
-        prefs.edit().putString("lista", listaComoTexto).apply();
-    }
-
-    private ArrayList<String> carregarLista() {
-        String listaComoTexto = prefs.getString("lista", "");
-        if (!listaComoTexto.isEmpty()) {
-            return new ArrayList<>(Arrays.asList(listaComoTexto.split("#")));
-        } else {
-            return new ArrayList<>();
-        }
-    }
-
-    private void preencherUltimaPessoa() {
-        if (!listaVIP.isEmpty()) {
-            String ultima = listaVIP.get(listaVIP.size() - 1);
-            pessoa p = pessoa.fromFormatString(ultima);
-            if (p != null) {
-                nomeL.setText(p.getNome());
-                sobrenomeL.setText(p.getSobrenome());
-                cursoL.setText(p.getCurso());
-                telefoneL.setText(p.getTelefone());
-            }
-        }
-    }
 }

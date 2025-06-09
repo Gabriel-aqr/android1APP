@@ -9,6 +9,7 @@ public class pessoa {
         this.curso = curso;
         this.telefone = telefone;
     }
+    public pessoa() {}
 
     public String getNome() {
         return nome;
@@ -24,6 +25,22 @@ public class pessoa {
 
     public String getTelefone() {
         return telefone;
+    }
+
+    public void setN(String nome) {
+        this.nome = nome;
+    }
+
+    public void setS(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public void setC(String curso) {
+        this.curso = curso;
+    }
+
+    public void setT(String telefone) {
+        this.telefone = telefone;
     }
 
     @Override

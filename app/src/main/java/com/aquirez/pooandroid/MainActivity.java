@@ -1,62 +1,87 @@
 package com.aquirez.pooandroid;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import util.salvar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import pessoas.pessoa;
-import androidx.activity.EdgeToEdge;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import pessoas.pessoa;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView nomeL = findViewById(R.id.nome);
-    TextView sobrenomeL = findViewById(R.id.sobrenome);
-    TextView cursoL = findViewById(R.id.curso);
-    TextView telefoneL = findViewById(R.id.telefone);
-
-    pessoa pessoa = new pessoa(nomeL, sobrenomeL, cursoL, telefoneL);
+    EditText nomeL, sobrenomeL, cursoL, telefoneL;
+    ArrayList<String> listaVIP;
+    SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        nomeL = findViewById(R.id.nome);
+        sobrenomeL = findViewById(R.id.sobrenome);
+        cursoL = findViewById(R.id.curso);
+        telefoneL = findViewById(R.id.telefone);
+
+        prefs = getSharedPreferences("vipLista", MODE_PRIVATE);
+        listaVIP = carregarLista();
+
+        preencherUltimaPessoa();
     }
 
+    public void btn_salvar(View view) {
+        pessoa p = new pessoa(
+                nomeL.getText().toString(),
+                sobrenomeL.getText().toString(),
+                cursoL.getText().toString(),
+                telefoneL.getText().toString()
+        );
+
+
+        Toast.makeText(this, "Adicionado à Lista VIP!", Toast.LENGTH_SHORT).show();
+    }
 
     public void limpar(View view) {
-        TextView nomeL = findViewById(R.id.nome);
-        TextView sobrenomeL = findViewById(R.id.sobrenome);
-        TextView cursoL = findViewById(R.id.curso);
-        TextView telefoneL = findViewById(R.id.telefone);
         nomeL.setText("");
         sobrenomeL.setText("");
         cursoL.setText("");
         telefoneL.setText("");
     }
 
-    public void btn_salvar(View view, TextView nome, TextView sobrenome, TextView curso, TextView telefone) {
-        salvar.Salvar(getApplicationContext(), String.valueOf(nome), String.valueOf(sobrenome), String.valueOf(curso), String.valueOf(telefone));
-
+    public void finalizar(View view) {
+        finish();
     }
 
-    public void finalizar() {
+    private void salvarLista() {
+        String listaComoTexto = String.join("#", listaVIP);
+        prefs.edit().putString("lista", listaComoTexto).apply();
+    }
 
+    private ArrayList<String> carregarLista() {
+        String listaComoTexto = prefs.getString("lista", "");
+        if (!listaComoTexto.isEmpty()) {
+            return new ArrayList<>(Arrays.asList(listaComoTexto.split("#")));
+        } else {
+            return new ArrayList<>();
+        }
+    }
 
+    private void preencherUltimaPessoa() {
+        if (!listaVIP.isEmpty()) {
+            String ultima = listaVIP.get(listaVIP.size() - 1);
+            pessoa p = pessoa.fromFormatString(ultima);
+            if (p != null) {
+                nomeL.setText(p.getNome());
+                sobrenomeL.setText(p.getSobrenome());
+                cursoL.setText(p.getCurso());
+                telefoneL.setText(p.getTelefone());
+            }
+        }
     }
 }
-
-
-

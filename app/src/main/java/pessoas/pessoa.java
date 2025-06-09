@@ -1,52 +1,43 @@
 package pessoas;
 
-import android.widget.TextView;
-
 public class pessoa {
+    private String nome, sobrenome, curso, telefone;
 
-    private TextView nome;
-    private TextView sobrenome;
-    private TextView curso;
-    private TextView telefone;
-
-
-    public pessoa(TextView nome, TextView sobrenome, TextView curso, TextView telefone) {
+    public pessoa(String nome, String sobrenome, String curso, String telefone) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.curso = curso;
         this.telefone = telefone;
     }
 
-    public TextView getNome() {
+    public String toFormatString() {
+        return nome + ";" + sobrenome + ";" + curso + ";" + telefone;
+    }
+
+    public static pessoa fromFormatString(String str) {
+        String[] dados = str.split(";");
+        if (dados.length == 4) {
+            return new pessoa(dados[0], dados[1], dados[2], dados[3]);
+        } else {
+            return null;
+        }
+    }
+
+
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(TextView nome) {
-        this.nome = nome;
-    }
-
-    public TextView getSobrenome() {
+    public String getSobrenome() {
         return sobrenome;
     }
 
-    public void setSobrenome(TextView sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public TextView getCurso() {
+    public String getCurso() {
         return curso;
     }
 
-    public void setCurso(TextView curso) {
-        this.curso = curso;
-    }
-
-    public TextView getTelefone() {
+    public String getTelefone() {
         return telefone;
-    }
-
-    public void setTelefone(TextView telefone) {
-        this.telefone = telefone;
     }
 
     @Override
